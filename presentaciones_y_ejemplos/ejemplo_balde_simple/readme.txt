@@ -1,0 +1,1 @@
+Esta clase y los elementos no se pueden compilar aislados, tienen que ser incluidos en un proyecto de libgdx que se haya generado previamente como vimos en clase.
