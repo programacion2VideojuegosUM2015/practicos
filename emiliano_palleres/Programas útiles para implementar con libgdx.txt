@@ -1,0 +1,21 @@
+-Creacion de escenarios mediante tiles (celdas):
+
+Tiled:
+http://www.mapeditor.org/
+
+-Editor y creador de Sprite Sheet (plantillas de sprites):
+
+Texture Packer:
+https://www.codeandweb.com/texturepacker
+
+-Editor de niveles y creador de UI:
+
+Overlap 2D:
+http://overlap2d.com/
+
+-Iluminacion dinámica para juegos 2D mediante normal maps:
+https://www.codeandweb.com/spriteilluminator
+
+Editor de físicas y creador automatico de colisiones:
+https://www.codeandweb.com/physicseditor/features
+
