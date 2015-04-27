@@ -1,1 +1,0 @@
-En esta carpeta tenes que subir todos los prácticos y presentaciones que hagas.
