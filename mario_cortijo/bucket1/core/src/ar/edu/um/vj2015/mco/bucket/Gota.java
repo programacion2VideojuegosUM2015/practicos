@@ -51,9 +51,9 @@ public class Gota {
 	//-----------------------------------------------------------------------------------------
 	public void CreateGota() {
 		dropImage = new Texture(Gdx.files.internal("droplet.png"));
-		dropImage2 = new Texture(Gdx.files.internal("droplet2.png"));
-		dropImage3 = new Texture(Gdx.files.internal("droplet3.png"));
-		dropImage4 = new Texture(Gdx.files.internal("droplet4.png"));
+		dropImage2 = new Texture(Gdx.files.internal("alien.png"));
+		dropImage3 = new Texture(Gdx.files.internal("stone.png"));
+		dropImage4 = new Texture(Gdx.files.internal("gift.png"));
 		dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));	
 	}
 	//-----------------------------------------------------------------------------------------
