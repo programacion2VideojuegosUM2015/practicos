@@ -1,0 +1,17 @@
+Cambios realizados al juego del balde, 26 de abril 2015:
+
+-Añadido menú de seleccion de 1 o 2 jugadores con música.
+-Añadida nueva clase Gota Y Balde con sus respectivas coliSiones rectangulares.
+-Añadidas 5 tipos de gotas diferentes:
+   Gota azul: velocidad lenta, otorga 1 punto.
+   Gota verde: velocidad media, otorga 2 puntos.
+   Gota roja: velocidad rapida, otorga 3 puntos.
+   Gota amarilla: velocidad muy rapida, otroga 4 puntos.
+   Gota especial multicolor: velocidad maxima, otorga 10 puntos, muy poco frecuente.
+-Añadido segundo jugador y ajustes para ambos modos de juego (1 o dos jugadores)
+-Al pasar el tiempo, las gotas caen con mas frecuencia hasta llegar al punto maximo.
+-Añadido contador de puntajes y contador de gotas para ambos jugadores. 
+-Añadido contador regresivo de tiempo de la partida.
+-Añadido mensaje de juego terminado y resultados en el modo de dos jugadores.
+
+David Emiliano Palleres.
