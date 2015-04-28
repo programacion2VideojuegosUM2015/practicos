@@ -1,4 +1,4 @@
-Cambios realizados al juego del balde, 26 de abril 2015:
+Cambios realizados al juego del balde, 27 de abril 2015:
 
 -Añadido menú de seleccion de 1 o 2 jugadores con música.
 -Añadida nueva clase Gota Y Balde con sus respectivas coliSiones rectangulares.
@@ -15,3 +15,5 @@ Cambios realizados al juego del balde, 26 de abril 2015:
 -Añadido mensaje de juego terminado y resultados en el modo de dos jugadores.
 
 David Emiliano Palleres.
+
+Subido archivo ¡Atrapa las gotas!- 1.0.jar compilado para jugar el juego en escritorio.
