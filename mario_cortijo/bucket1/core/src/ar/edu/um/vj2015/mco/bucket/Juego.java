@@ -4,35 +4,29 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-//import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import java.util.Iterator;
-//import java.util.Random;
-
-
-
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
-//import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
-//import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-//import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+
+
 
 public class Juego extends ApplicationAdapter {
 	private Music rainMusic;
 	private SpriteBatch batch;
 	private OrthographicCamera camera;
 	private BitmapFont fuente;
-
+	Array<Drop> arrayDrop;
+	long lastDropTime;
+	long tiempo;
+	
 	static Balde balde2 = new Balde();
 	static Balde balde1 = new Balde();
-	static Gota gota1 = new Gota(); 
 	
 	@Override
 	public void create() {
@@ -50,13 +44,26 @@ public class Juego extends ApplicationAdapter {
 		camera.setToOrtho(false, 800, 480);
 		batch = new SpriteBatch();
 
+		//CREO BALDES Y GOTAS
 		getBalde().CreateBalde();
 		getBalde2().CreateBalde();
 		getBalde2().SetPlayer2();
-		getGota().CreateGota();
-		getGota().spawnRaindrop();
+		arrayDrop = new Array<Drop>();
+		spawnDrop();
 	}
 
+	private void spawnDrop() {
+		Drop oneDrop = new Drop();
+		oneDrop.setDropX(MathUtils.random(0, 800 - 64));
+		oneDrop.setDropY(480);
+		oneDrop.setWidth(64);
+		oneDrop.setHeight(64);
+		oneDrop.setDropTipo(MathUtils.random(0,800));
+		arrayDrop.add(oneDrop);	
+		lastDropTime = TimeUtils.nanoTime();
+	}
+
+	
 	@Override
 	public void render() {
 		// clear the screen with a dark blue color. The
@@ -77,19 +84,20 @@ public class Juego extends ApplicationAdapter {
 		// all drops
 		batch.begin();
 		
+		//DIBUJO PUNTAJES
 		fuente.draw(batch, getBalde().getBucketScoreName(), 20, 470);
 		fuente.draw(batch, getBalde2().getBucketScoreName(), 710, 470); 
 		
+		//DIBUJO BALDES
 		batch.draw(getBalde().getBucketImage(), getBalde().getBucketX(), getBalde().getBucketY());
 		batch.draw(getBalde2().getBucketImage2(), getBalde2().getBucketX(), getBalde2().getBucketY());	
-				
-		
-		for (Rectangle raindrop : getGota().getRaindrops()) {
-			if(raindrop.x%100 == 0) { batch.draw(getGota().getDropImage4(), raindrop.x, raindrop.y); } 
-			else if(raindrop.x%3 == 0) { batch.draw(getGota().getDropImage2(), raindrop.x, raindrop.y); } 	
-			else if(raindrop.x%2 == 0) { batch.draw(getGota().getDropImage3(), raindrop.x, raindrop.y); } 
-			else { batch.draw(getGota().getDropImage(), raindrop.x, raindrop.y); }
-			
+	
+		//DIBUJO GOTAS
+		for (Drop oneDrop : arrayDrop) {
+			if(oneDrop.getDropTipo()%100 == 0){ batch.draw(oneDrop.getDropImage4(), oneDrop.getDropX(), oneDrop.getDropY()); }
+			else if(oneDrop.getDropTipo()%3 == 0) { batch.draw(oneDrop.getDropImage2(), oneDrop.getDropX(), oneDrop.getDropY()); } 	
+			else if(oneDrop.getDropTipo()%2 == 0) { batch.draw(oneDrop.getDropImage3(), oneDrop.getDropX(), oneDrop.getDropY()); } 
+			else { batch.draw(oneDrop.getDropImage(), oneDrop.getDropX(), oneDrop.getDropY()); }
 		}
 		batch.end();
 
@@ -109,61 +117,67 @@ public class Juego extends ApplicationAdapter {
 		//PLAYER 1
 		if (getBalde().getBucketX() < 0)
 			getBalde().setBucketX(0);
-		if (getBalde().getBucketX() > 400 - 64)
-			getBalde().setBucketX(400 - 64);
+		if (getBalde().getBucketX() > 390 - 64)
+			getBalde().setBucketX(390 - 64);
 		//PLAYER 2
-		if (getBalde2().getBucketX() < 400)
-			getBalde2().setBucketX(400);
+		if (getBalde2().getBucketX() < 410)
+			getBalde2().setBucketX(410);
 		if (getBalde2().getBucketX() > 800 - 64)
 			getBalde2().setBucketX(800 - 64);
 
-		// check if we need to create a new raindrop
-		if (TimeUtils.nanoTime() - getGota().getLastDropTime() > 1000000000)
-			getGota().spawnRaindrop();
-
-		// move the raindrops, remove any that are beneath the bottom edge of
-		// the screen or that hit the bucket. In the later case we play back
-		// a sound effect as well.
-		Iterator<Rectangle> iter = getGota().getRaindrops().iterator();
-		while (iter.hasNext()) {
-			Rectangle raindrop = iter.next();
-			raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
-			if (raindrop.y + 64 < 0)
-				iter.remove();
-			//COLISION P1
-			if (raindrop.overlaps(getBalde().getBucket())) {
+		//CREAR GOTA NUEVA
+		if ((TimeUtils.nanoTime() - lastDropTime > ((1000000000/1)-(tiempo*1000000000/100))) && (tiempo < 120))
+			spawnDrop();
+		Iterator<Drop> iter2 = arrayDrop.iterator();
+		while (iter2.hasNext()) {
+			Drop oneDrop = iter2.next();
+				
+			    //VELOCIDADES GOTA DEPENDIENDO DEL TIPO
+				if(oneDrop.getDropTipo()%100 == 0){ oneDrop.setDropY(oneDrop.getDropY() - 300 * Gdx.graphics.getDeltaTime()); }
+				else if(oneDrop.getDropTipo()%3 == 0) { oneDrop.setDropY(oneDrop.getDropY() - 220 * Gdx.graphics.getDeltaTime()); } 	
+				else if(oneDrop.getDropTipo()%2 == 0) { oneDrop.setDropY(oneDrop.getDropY() - 215 * Gdx.graphics.getDeltaTime()); } 
+				else { oneDrop.setDropY(oneDrop.getDropY() - 200 * Gdx.graphics.getDeltaTime()); }
+				
+				oneDrop.getDropHitBox().y = oneDrop.getDropY();
+				oneDrop.getDropHitBox().x = oneDrop.getDropX()+((oneDrop.getWidth()/2)-(oneDrop.getDropHitBox().getWidth()/2));
+			    //DESTRUYO GOTA SI PASA DE BORDE
+			    if (oneDrop.getDropY() + 64 < 0){
+				  iter2.remove();
+		        }
+			
+			//COLISION P1    
+			if (oneDrop.getDropHitBox().overlaps(getBalde().getBucket())) {
 			   	//PUNTAJES	
-				if(raindrop.x%100 == 0) { getBalde().setBucketScore(getBalde().getBucketScore() + MathUtils.random(25,50)); }
-				else if(raindrop.x%3 == 0) { getBalde().setBucketScore(getBalde().getBucketScore() + 3); }
-				else if(raindrop.x%2 == 0) { getBalde().setBucketScore(getBalde().getBucketScore() + 2); }
-				else { getBalde().setBucketScore(getBalde().getBucketScore() + 1); }	
+				if(oneDrop.getDropTipo()%100 == 0) { getBalde().setBucketScore(getBalde().getBucketScore() + MathUtils.random(25,50)); }
+				else if(oneDrop.getDropTipo()%3 == 0) { getBalde().setBucketScore(getBalde().getBucketScore() + 3); }
+				else if(oneDrop.getDropTipo()%2 == 0) { getBalde().setBucketScore(getBalde().getBucketScore() + 2); }
+				else { getBalde().setBucketScore(getBalde().getBucketScore() + 1); }
 			    getBalde().setBucketScoreName("Puntaje: " + getBalde().getBucketScore());
 				
-			    getGota().getDropSound().play();
-				iter.remove();
+			    oneDrop.getDropSound().play();
+				iter2.remove();
 			}
 			//COLISION P2
-			if (raindrop.overlaps(getBalde2().getBucket())) {
+			if (oneDrop.getDropHitBox().overlaps(getBalde2().getBucket())) {
 			   	//PUNTAJES	
-				if(raindrop.x%100 == 0) { getBalde2().setBucketScore(getBalde2().getBucketScore() + MathUtils.random(25,50)); }
-				else if(raindrop.x%3 == 0) { getBalde2().setBucketScore(getBalde2().getBucketScore() + 3); }
-				else if(raindrop.x%2 == 0) { getBalde2().setBucketScore(getBalde2().getBucketScore() + 2); }
+				if(oneDrop.getDropTipo()%100 == 0) { getBalde2().setBucketScore(getBalde2().getBucketScore() + MathUtils.random(25,50)); }
+				else if(oneDrop.getDropTipo()%3 == 0) { getBalde2().setBucketScore(getBalde2().getBucketScore() + 3); }
+				else if(oneDrop.getDropTipo()%2 == 0) { getBalde2().setBucketScore(getBalde2().getBucketScore() + 2); }
 				else { getBalde2().setBucketScore(getBalde2().getBucketScore() + 1); }	
 			    getBalde2().setBucketScoreName("Puntaje: " + getBalde2().getBucketScore());
 				
-			    getGota().getDropSound().play();
-				iter.remove();
+			    oneDrop.getDropSound().play();
+				iter2.remove();
 			}
 		}
+		
 	}
 
 	@Override
 	public void dispose() {
 		// dispose of all the native resources
-		getGota().getDropImage().dispose();
 		getBalde().getBucketImage().dispose();
 		getBalde().getBucketImage2().dispose();
-		getGota().getDropSound().dispose();
 		rainMusic.dispose();
 		batch.dispose();
 	}
@@ -182,6 +196,5 @@ public class Juego extends ApplicationAdapter {
 
 	public Balde getBalde2() { return balde2; }
 	public Balde getBalde() { return balde1; }
-	public Gota getGota() { return gota1; }
 	
 }
