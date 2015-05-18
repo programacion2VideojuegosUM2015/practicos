@@ -37,8 +37,8 @@ public class Nave {
 		//aca le asignamos dos limites
 		if (contornoNave.x < 0)
 			contornoNave.x = 0;
-		if (contornoNave.x > 800 - 64)
-			contornoNave.x = 800 - 64;
+		if (contornoNave.x > 300 - 64)
+			contornoNave.x = 300 - 64;
 	}
 	
 	public void draw(SpriteBatch batch){
