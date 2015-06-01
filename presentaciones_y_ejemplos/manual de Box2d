@@ -1,1 +1,2 @@
 En este enlace (http://box2d.org/manual.pdf) van a encontrar el manual de Box2d donde pueden ver como generar mundos y agregarle objetos y utilizar la fisica. 
+Una aclaracion importante esta libreria esta escrita en c++ pero las clases, metodos y atributos tienen los mismos nombres en java, entonces todos los conceptos son perfectamente aplicables desde java (usando libgx con box2d incluido)
