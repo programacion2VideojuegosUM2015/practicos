@@ -12,16 +12,17 @@ public class Spaceship {
     private Texture spaceship;
 	private Rectangle spaceshipOutline;
 	private int movementSpeed;
+	private int x=368;
+	private int y=10;
 	
-	
-	public Spaceship(float x, float y){
+	public Spaceship(){
 	spaceship = new Texture(Gdx.files.internal("spaceship.png"));
 	spaceshipOutline = new Rectangle(x ,y ,64 ,64);
 	movementSpeed = 300;
 	}
 	public void draw(SpriteBatch batch){
 	
-		batch.draw(spaceship ,spaceshipOutline.x ,spaceshipOutline.y ,64 , 64);
+		batch.draw(spaceship ,spaceshipOutline.getX() ,spaceshipOutline.getY() ,64 , 64);
 		
 	}
 	
@@ -35,4 +36,9 @@ public class Spaceship {
 		if (spaceshipOutline.x > 800 - 64)
 			spaceshipOutline.x = 800 - 64;
 	}
+	public Rectangle getSpaceshipOutline() {
+		return spaceshipOutline;
+	}
+	
+	
 }

@@ -11,6 +11,9 @@ public class GameScreen extends AbstractScreen {
 	private float escala;
 	private Spaceship spaceship;
 	private Monsters monsters;
+	private Bullets bullets;
+	
+	
 
 	public GameScreen(Galaxy galaxy) {
 		super(galaxy);		
@@ -20,19 +23,24 @@ public class GameScreen extends AbstractScreen {
 	public void show(){
 		batch = new SpriteBatch();
 		wallPaper = new Texture(Gdx.files.internal("fondo.jpeg"));	
-		spaceship = new Spaceship(400,10);
+		spaceship = new Spaceship();
 		monsters = new Monsters();
+		bullets= new Bullets(spaceship.getSpaceshipOutline().getX() , spaceship.getSpaceshipOutline().y);
+	
 	}
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 		spaceship.updateMovement();
-		monsters.MonsterSpawn();
+		monsters.updateMonsters();
+		bullets.update();
+		monsters.detectCollision(bullets);
 		batch.begin();
 		batch.draw(wallPaper, 0, 0, wallPaper.getWidth()/escala, wallPaper.getHeight()/escala);
 		spaceship.draw(batch);
 		monsters.draw(batch);
+		bullets.draw(batch);
 		batch.end();
 	}
 	@Override

@@ -3,7 +3,7 @@ package ar.edu.um.vj2015;
 import com.badlogic.gdx.Screen;
 
 public class AbstractScreen implements Screen {
-	private Galaxy galaxy;
+	protected Galaxy galaxy;
 
 	
 	public AbstractScreen(Galaxy galaxy) {
