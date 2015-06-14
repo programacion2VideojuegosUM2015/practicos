@@ -12,7 +12,8 @@ public class Ladrillo extends Actores{
 	
 	public TipoLadrillo tipo;
 	public Sound sonidoGolpe;
-
+	public  final int LADRILLO_ANCHURA = 45;
+	public  final int LADRILLO_ALTURA = 23;
 	
 	//constructor de ladrillo
 	public Ladrillo(Texture textura,float x, float y,TipoLadrillo tipo) {

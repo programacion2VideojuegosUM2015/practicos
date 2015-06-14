@@ -15,7 +15,7 @@ public class PantallaGanador implements Screen {
 		this.arcanoid = arcanoid;
 		fondoGanador = ManejadorDeRecursos.getTextura("fondoGanaste");
 		camara = new OrthographicCamera();
-		camara.setToOrtho(false,Constantes.PANTALLA_ANCHURA, Constantes.PANTALLA_ALTURA);
+		camara.setToOrtho(false,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override
@@ -28,15 +28,14 @@ public class PantallaGanador implements Screen {
 		arcanoid.spriteBatch.setProjectionMatrix(camara.combined);
 		
 		arcanoid.spriteBatch.begin();
-		arcanoid.spriteBatch.draw(fondoGanador, 0, 0,Constantes.PANTALLA_ANCHURA,Constantes.PANTALLA_ALTURA);
+		arcanoid.spriteBatch.draw(fondoGanador, 0, 0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		arcanoid.spriteBatch.end();
 		
 		
 		  //Si el usuario toca la pantalla se inicia la partida
 		 
 		if (Gdx.input.isTouched()){
-			dispose();
-			System.exit(0);
+			arcanoid.setScreen(new PantallaJuego(arcanoid));
 		}
 	}
 	
