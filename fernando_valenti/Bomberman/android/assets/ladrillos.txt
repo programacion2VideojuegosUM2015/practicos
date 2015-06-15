@@ -1,0 +1,60 @@
+ladrillos.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+ladrillo
+  rotate: false
+  xy: 2, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+ladrilloexp
+  rotate: false
+  xy: 20, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+ladrilloexp
+  rotate: false
+  xy: 38, 2
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+ladrilloexp
+  rotate: false
+  xy: 2, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+ladrilloexp
+  rotate: false
+  xy: 20, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+ladrilloexp
+  rotate: false
+  xy: 38, 20
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+ladrilloexp
+  rotate: false
+  xy: 2, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+ladrilloexp
+  rotate: false
+  xy: 20, 38
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
