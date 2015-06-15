@@ -16,7 +16,7 @@ public class PantallaPrincipal implements Screen {
 	public PantallaPrincipal(Arcanoid arcanoid) {
 		this.arcanoid = arcanoid;
 		camara = new OrthographicCamera();
-		camara.setToOrtho(false, Constantes.PANTALLA_ANCHURA, Constantes.PANTALLA_ALTURA);
+		camara.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		fondoInicio = new Texture(Gdx.files.internal("pantallaInicio.jpg"));
 	}
 
@@ -27,9 +27,10 @@ public class PantallaPrincipal implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		//Muestra un menú de inicio
 		arcanoid.spriteBatch.begin();
-		arcanoid.spriteBatch.draw(fondoInicio, 0, 0,Constantes.PANTALLA_ANCHURA,Constantes.PANTALLA_ALTURA);
+		arcanoid.spriteBatch.draw(fondoInicio, 0, 0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		arcanoid.spriteBatch.end();
-		
+		arcanoid.spriteBatch.setProjectionMatrix(camara.combined);
+
 		//Si el usuario toca la pantalla se inicia la partida
 		 
 		if (Gdx.input.isTouched()) {
@@ -41,7 +42,7 @@ public class PantallaPrincipal implements Screen {
 			System.exit(0);
 		}
 		camara.update();
-		arcanoid.spriteBatch.setProjectionMatrix(camara.combined);
+
 	}
 
 	@Override

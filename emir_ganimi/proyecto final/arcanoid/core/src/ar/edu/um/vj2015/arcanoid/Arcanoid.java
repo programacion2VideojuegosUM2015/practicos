@@ -1,6 +1,7 @@
 package ar.edu.um.vj2015.arcanoid;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,7 +23,7 @@ public class Arcanoid extends Game {
     	  	spriteBatch = new SpriteBatch();
             fuente = new BitmapFont();
             camara = new OrthographicCamera();
-    		camara.setToOrtho(false, Constantes.PANTALLA_ANCHURA, Constantes.PANTALLA_ALTURA);
+    		camara.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     		camara.update();
             setScreen(new PantallaPrincipal(this));
 
