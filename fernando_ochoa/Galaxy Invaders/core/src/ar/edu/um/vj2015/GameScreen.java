@@ -3,6 +3,7 @@ package ar.edu.um.vj2015;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen extends AbstractScreen {
@@ -12,7 +13,8 @@ public class GameScreen extends AbstractScreen {
 	private Spaceship spaceship;
 	private Monsters monsters;
 	private Bullets bullets;
-	
+	private Player player;
+
 	
 
 	public GameScreen(Galaxy galaxy) {
@@ -25,7 +27,9 @@ public class GameScreen extends AbstractScreen {
 		wallPaper = new Texture(Gdx.files.internal("fondo.jpeg"));	
 		spaceship = new Spaceship();
 		monsters = new Monsters();
-		bullets= new Bullets(spaceship.getSpaceshipOutline().getX() , spaceship.getSpaceshipOutline().y);
+		bullets= new Bullets();
+		player = new Player();
+		
 	
 	}
 	@Override
@@ -33,15 +37,17 @@ public class GameScreen extends AbstractScreen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
 		spaceship.updateMovement();
-		monsters.updateMonsters();
 		bullets.update();
-		monsters.detectCollision(bullets);
+		//monsters.detectCollision(bullets);
+		bullets.detectCollision(player);
 		batch.begin();
 		batch.draw(wallPaper, 0, 0, wallPaper.getWidth()/escala, wallPaper.getHeight()/escala);
-		spaceship.draw(batch);
 		monsters.draw(batch);
+		spaceship.draw(batch);
 		bullets.draw(batch);
+		player.draw(batch);
 		batch.end();
+		
 	}
 	@Override
 	public void resize(int width, int height) {
