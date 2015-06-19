@@ -40,5 +40,11 @@ public class Spaceship {
 		return spaceshipOutline;
 	}
 	
+	public void dispose(){
+		
+		spaceship.dispose();
+		
+	}
+	
 	
 }

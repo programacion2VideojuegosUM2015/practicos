@@ -4,5 +4,7 @@ public final class Screens {
 	public static Galaxy game;
 	public static AbstractScreen gameScreen;
 	public static AbstractScreen mainScreen;
+	public static AbstractScreen loserScreen;
+	public static AbstractScreen winnerScreen;
 
 }

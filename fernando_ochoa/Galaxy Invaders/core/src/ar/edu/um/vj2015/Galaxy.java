@@ -13,6 +13,8 @@ public class Galaxy extends Game {
 		Screens.game = this;
 		Screens.gameScreen = new GameScreen(this);
 		Screens.mainScreen = new MainScreen(this);
+		Screens.loserScreen = new LoserScreen(this);
+		Screens.winnerScreen = new WinnerScreen(this);
 		setScreen(Screens.mainScreen);
 	}
 

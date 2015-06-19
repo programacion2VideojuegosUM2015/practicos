@@ -1,14 +1,19 @@
 package ar.edu.um.vj2015;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 
 public class AbstractScreen implements Screen {
 	protected Galaxy galaxy;
+	protected OrthographicCamera camera;
 
 	
 	public AbstractScreen(Galaxy galaxy) {
 		
-		this.galaxy = galaxy;
+		this.galaxy = galaxy;		
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 
 	@Override
@@ -25,7 +30,7 @@ public class AbstractScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

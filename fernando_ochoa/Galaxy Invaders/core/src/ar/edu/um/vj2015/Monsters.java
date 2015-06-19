@@ -18,7 +18,8 @@ public class Monsters {
 	public Monsters(){
 		monstership = new Texture(Gdx.files.internal("mspaceship2.png"));
 		monsters = new Array<Monster>();	
-		this.monsterSpawn();	
+		this.monsterSpawn();
+		
 	}
 
 	public void draw(SpriteBatch batch){
@@ -52,20 +53,29 @@ public class Monsters {
 		}
 	}
 	
-	public void detectCollision(Bullets bullets){
-		for (Monster monster : monsters) {
-		if (monster.getMonstersOutline().overlaps(bullets.getBullet().getBulletOutline())) {			
-			monsters.removeValue(monster, true);
-			}	
+	public Monster returnMonster(){
+	    int i = 0;
+		
+		for(Monster monster: monsters){			
+			monsters.get(i);
+			i++;
+			if(i == 59)
+				i=0;
 		}
-}
-
-	public Monster getMonster() {
 		return monster;
+		
 	}
+
+	/*public Monster getMonster() {
+		return monster;
+	}*/
 
 	public Array<Monster> getMonsters() {
 		return monsters;
+	}
+	
+	public void dispose(){
+		monstership.dispose();
 	}
 	
 

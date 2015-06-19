@@ -1,44 +1,56 @@
 package ar.edu.um.vj2015;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
+
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+
 public class MainScreen extends AbstractScreen {
 	private Texture wallPaper2;
-	private SpriteBatch batch;
+	private Texture buttonTexture;
+	private SpriteBatch batch;	
+	private Button play;
+	private Button exit;
 	private float escala;
+	private Resources resources;
 
 	public MainScreen(Galaxy galaxy) {
 		super(galaxy);
 		
-	
 	}
 	
 	public void show(){
 		batch = new SpriteBatch();
-		wallPaper2 = new Texture(Gdx.files.internal("fondomain.png"));	
-		
-		
+		wallPaper2 = new Texture(Gdx.files.internal("fondomain2.png"));
+		buttonTexture =new Texture(Gdx.files.internal("botonsalir.png"));
+		int centerX = Gdx.graphics.getWidth()/2 - buttonTexture.getWidth()/2;
+		int centerY = Gdx.graphics.getHeight()/2 - buttonTexture.getHeight()/2;
+		play = new PlayButton(centerX -150, centerY -150);
+		exit = new ExitButton(centerX +150, centerY -150);
+		resources = new Resources();		
+		resources.getMainSong().play();
+		resources.getMainSong().setLooping(true);
+
+	
 	
 	}
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		batch.draw(wallPaper2, 0, 0, wallPaper2.getWidth()/escala, wallPaper2.getHeight()/escala);
+		play.draw(batch);
+		exit.draw(batch);
 		batch.end();
-		if (Gdx.input.isKeyPressed(Keys.ENTER)) {
-			Screens.game.setScreen(Screens.gameScreen);
-			dispose();
-		}
-		if (Gdx.input.isKeyPressed(Keys.ESCAPE)) {
-			dispose();
-			System.exit(0);
-		}
+		play.update();
+		exit.update();
+		
+	
 		
 	}
 		
@@ -56,6 +68,17 @@ public class MainScreen extends AbstractScreen {
 			widthImage = width;
 		    heigthImage = widthImage*p;
 		}
-		escala = width/widthImage;
+		escala = width/widthImage;	
 	}
+	
+	@Override
+	public void dispose(){
+		wallPaper2.dispose();
+		buttonTexture.dispose();
+		resources.getMainSong().dispose();
+	}
+
+	
+	
 }
+

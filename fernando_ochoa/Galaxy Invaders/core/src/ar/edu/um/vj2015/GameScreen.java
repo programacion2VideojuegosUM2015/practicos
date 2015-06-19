@@ -1,9 +1,10 @@
 package ar.edu.um.vj2015;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 
+import com.badlogic.gdx.graphics.GL20;
+
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen extends AbstractScreen {
@@ -14,11 +15,17 @@ public class GameScreen extends AbstractScreen {
 	private Monsters monsters;
 	private Bullets bullets;
 	private Player player;
+	
+	
 
 	
 
 	public GameScreen(Galaxy galaxy) {
-		super(galaxy);		
+		super(galaxy);	
+		
+		
+		
+		
 	}
 
 	@Override
@@ -29,6 +36,10 @@ public class GameScreen extends AbstractScreen {
 		monsters = new Monsters();
 		bullets= new Bullets();
 		player = new Player();
+		/*resources = new Resources();
+		resources.getMainSong().stop();
+		resources.getGameSong().play();
+		resources.getGameSong().setLooping(true);*/
 		
 	
 	}
@@ -36,10 +47,12 @@ public class GameScreen extends AbstractScreen {
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 		spaceship.updateMovement();
-		bullets.update();
-		//monsters.detectCollision(bullets);
+		bullets.update();		
 		bullets.detectCollision(player);
+		bullets.detectCollision2();
 		batch.begin();
 		batch.draw(wallPaper, 0, 0, wallPaper.getWidth()/escala, wallPaper.getHeight()/escala);
 		monsters.draw(batch);
@@ -63,5 +76,12 @@ public class GameScreen extends AbstractScreen {
 		    heigthImage = widthImage*p;
 		}
 		escala = width/widthImage;
+	}
+	
+	@Override
+	public void dispose(){
+		batch.dispose();
+		wallPaper.dispose();
+		
 	}
 }

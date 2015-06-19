@@ -34,6 +34,11 @@ public class Player {
 		lives -= 1;
 	}
 	
+	public void dispose(){
+		livesFont.dispose();
+		scoreFont.dispose();
+	}
+	
 	
 
 }
