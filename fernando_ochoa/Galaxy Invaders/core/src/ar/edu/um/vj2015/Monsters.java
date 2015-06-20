@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.TimeUtils;
 
 
 public class Monsters {
@@ -53,22 +54,17 @@ public class Monsters {
 		}
 	}
 	
-	public Monster returnMonster(){
-	    int i = 0;
+	public Monster getMonster(){	 
 		
 		for(Monster monster: monsters){			
-			monsters.get(i);
-			i++;
-			if(i == 59)
-				i=0;
+		
+			return monster;
 		}
 		return monster;
 		
+		
 	}
-
-	/*public Monster getMonster() {
-		return monster;
-	}*/
+	
 
 	public Array<Monster> getMonsters() {
 		return monsters;

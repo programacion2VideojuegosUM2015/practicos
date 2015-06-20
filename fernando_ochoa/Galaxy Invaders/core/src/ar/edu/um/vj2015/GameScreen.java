@@ -52,7 +52,8 @@ public class GameScreen extends AbstractScreen {
 		spaceship.updateMovement();
 		bullets.update();		
 		bullets.detectCollision(player);
-		bullets.detectCollision2();
+		bullets.detectCollision2(monsters);
+		//monsters.detectCollision(bullets);
 		batch.begin();
 		batch.draw(wallPaper, 0, 0, wallPaper.getWidth()/escala, wallPaper.getHeight()/escala);
 		monsters.draw(batch);
