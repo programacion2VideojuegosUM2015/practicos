@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameScreen extends AbstractScreen {
 	private SpriteBatch batch;
 	private Texture wallPaper;
-	private float escala;
+	//private float escala;
 	private Spaceship spaceship;
 	private Monsters monsters;
 	private Bullets bullets;
@@ -52,10 +52,11 @@ public class GameScreen extends AbstractScreen {
 		spaceship.updateMovement();
 		bullets.update();		
 		bullets.detectCollision(player);
-		bullets.detectCollision2(monsters);
-		//monsters.detectCollision(bullets);
+		//bullets.detectCollision2(monsters);
+		monsters.detectCollision(bullets);
+
 		batch.begin();
-		batch.draw(wallPaper, 0, 0, wallPaper.getWidth()/escala, wallPaper.getHeight()/escala);
+		batch.draw(wallPaper, 0, 0, wallPaper.getWidth(), wallPaper.getHeight());
 		monsters.draw(batch);
 		spaceship.draw(batch);
 		bullets.draw(batch);
@@ -65,7 +66,7 @@ public class GameScreen extends AbstractScreen {
 	}
 	@Override
 	public void resize(int width, int height) {
-		float widthImage =  wallPaper.getWidth();
+		/*float widthImage =  wallPaper.getWidth();
 		float heigthImage = wallPaper.getHeight();
 		float p = heigthImage/widthImage; // sacamos proporcion
 		if(heigthImage > height){
@@ -76,7 +77,7 @@ public class GameScreen extends AbstractScreen {
 			widthImage = width;
 		    heigthImage = widthImage*p;
 		}
-		escala = width/widthImage;
+		escala = width/widthImage;*/
 	}
 	
 	@Override

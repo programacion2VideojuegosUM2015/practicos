@@ -106,23 +106,31 @@ public class Bullets {
  }
  
  //Metodo de colision entre las balas de la nave con los monstruos
- public void detectCollision2(Monsters monsters){
+ /*public void detectCollision2(Monsters monsters){
 	 for(Bullet bullet: bullets){
 	 if(bullet.getBulletOutline().overlaps(monsters.getMonster().getMonstersOutline())){
 		 bullets.removeValue(bullet, true);
 		 monsters.getMonsters().removeValue(monsters.getMonster(), true);
 	 }
 	 }
- }
+ }*/
  
  
 
 
 
 public Bullet getBullet() {
+	for(Bullet bullet: bullets){
+	return bullet;
+	}
 	return bullet;
 }
 
+
+
+public Array<Bullet> getBullets() {
+	return bullets;
+}
 public void dispose(){
 	bluebullet.dispose();
 	shot.dispose();

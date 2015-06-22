@@ -6,7 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.TimeUtils;
+
 
 
 public class Monsters {
@@ -19,6 +19,7 @@ public class Monsters {
 	public Monsters(){
 		monstership = new Texture(Gdx.files.internal("mspaceship2.png"));
 		monsters = new Array<Monster>();	
+
 		this.monsterSpawn();
 		
 	}
@@ -54,7 +55,7 @@ public class Monsters {
 		}
 	}
 	
-	public Monster getMonster(){	 
+	/*public Monster getMonster(){	 
 		
 		for(Monster monster: monsters){			
 		
@@ -63,7 +64,17 @@ public class Monsters {
 		return monster;
 		
 		
-	}
+	}*/
+
+	public void detectCollision(Bullets bullets){
+		for (Monster monster : monsters) {
+		if (monster.getMonstersOutline().overlaps(bullets.getBullet().getBulletOutline())) {			
+			monsters.removeValue(monster, true);
+			bullets.getBullets().removeValue(bullets.getBullet(), true);
+			}	
+		}
+}
+	
 	
 
 	public Array<Monster> getMonsters() {

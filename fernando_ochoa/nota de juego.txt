@@ -1,0 +1,5 @@
+Lo unico q le falta al juego es q colisionen las balas q salen desde la nave con los monstruos. Cuando las balas no las guardaba en un array
+estas colisionaban bien, pero segun el consejo del profesor las tenia q meter en un array para asi poder eliminarlas una vez q colisionaran, 
+desde ese momentola colision me da null. Se q algo me estoy pasando por alto pero no logro descubir que...
+
+En la clase Bullets tenes todos lo referido a las balas, metodos y demas.

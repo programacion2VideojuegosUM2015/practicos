@@ -43,7 +43,7 @@ public class MainScreen extends AbstractScreen {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		batch.draw(wallPaper2, 0, 0, wallPaper2.getWidth()/escala, wallPaper2.getHeight()/escala);
+		batch.draw(wallPaper2, 0, 0, wallPaper2.getWidth(), wallPaper2.getHeight());
 		play.draw(batch);
 		exit.draw(batch);
 		batch.end();
@@ -57,7 +57,7 @@ public class MainScreen extends AbstractScreen {
 	
 	@Override
 	public void resize(int width, int height) {
-		float widthImage =  wallPaper2.getWidth();
+		/*float widthImage =  wallPaper2.getWidth();
 		float heigthImage = wallPaper2.getHeight();
 		float p = heigthImage/widthImage; // sacamos proporcion
 		if(heigthImage > height){
@@ -68,7 +68,7 @@ public class MainScreen extends AbstractScreen {
 			widthImage = width;
 		    heigthImage = widthImage*p;
 		}
-		escala = width/widthImage;	
+		escala = width/widthImage;	*/
 	}
 	
 	@Override
