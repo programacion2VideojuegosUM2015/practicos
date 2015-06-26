@@ -69,9 +69,17 @@ public class GameScreen implements Screen {
 	}
 	//metodo donde el juego detecta las colisiones
 	public void detectarColision(){
+		
+		if(balas != null){
 		balas.colisionConPoliticos(politicos,jugador);
+		}
 		politicos.colisionConArma(revolver, mataCorrupto);
+		
 	}
+	
+	
+	
+	
 	@Override
 	public void resize(int width, int height) {
 	
