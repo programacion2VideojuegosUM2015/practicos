@@ -1,21 +1,19 @@
 package ar.edu.um.vj2015;
 
 import com.badlogic.gdx.Gdx;
-
 import com.badlogic.gdx.graphics.GL20;
-
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen extends AbstractScreen {
-	private SpriteBatch batch;
-	private Texture wallPaper;
-	//private float escala;
+
+	private Texture wallPaper;	
 	private Spaceship spaceship;
 	private Monsters monsters;
 	private Bullets bullets;
 	private Player player;
-	
+	private OrthographicCamera camera;
 	
 
 	
@@ -23,7 +21,8 @@ public class GameScreen extends AbstractScreen {
 	public GameScreen(Galaxy galaxy) {
 		super(galaxy);	
 		
-		
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false,800, 450);
 		
 		
 	}
@@ -36,18 +35,18 @@ public class GameScreen extends AbstractScreen {
 		monsters = new Monsters();
 		bullets= new Bullets();
 		player = new Player();
-		resources = new SoundResources();		
+		/*resources = new SoundResources();		
 		resources.getGameSong().play();
-		resources.getGameSong().setLooping(true);
-		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		resources.getGameSong().setLooping(true);*/
+		
 	
 	}
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );				
-		batch.setProjectionMatrix(camera.combined);
+		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );		
 		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 		spaceship.updateMovement();
 		bullets.update();
 		bullets.detectCollision(player);
@@ -59,30 +58,22 @@ public class GameScreen extends AbstractScreen {
 		bullets.draw(batch);
 		player.draw(batch);
 		batch.end();
-		if(player.getLives() == 0)			
-				resources.getGameSong().stop();
+		/*if(player.getLives() == 0)			
+				resources.getGameSong().stop();*/
 		
 	}
 	@Override
 	public void resize(int width, int height) {
-		/*float widthImage =  wallPaper.getWidth();
-		float heigthImage = wallPaper.getHeight();
-		float p = heigthImage/widthImage; // sacamos proporcion
-		if(heigthImage > height){
-			heigthImage = height;
-	        widthImage = heigthImage/p;	
-		}
-		if(widthImage > width){
-			widthImage = width;
-		    heigthImage = widthImage*p;
-		}
-		escala = width/widthImage;*/
+		
 	}
+	
 	
 	@Override
 	public void dispose(){
 		batch.dispose();
 		wallPaper.dispose();
+		resources.getGameSong().dispose();
+		batch.dispose();
 		
 	}
 }

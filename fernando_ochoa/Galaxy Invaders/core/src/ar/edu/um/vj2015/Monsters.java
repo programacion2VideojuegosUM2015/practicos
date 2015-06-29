@@ -86,6 +86,7 @@ public class Monsters {
 	
 	public void dispose(){
 		monstership.dispose();
+		resources.getExplosion().dispose();
 	}
 
 	public Monster getMonster() {
