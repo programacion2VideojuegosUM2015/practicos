@@ -13,6 +13,7 @@ public class PlayButton extends Button {
 
 	@Override
 	public void performance() {
+		
 		Screens.game.setScreen(Screens.gameScreen);
 
 	}

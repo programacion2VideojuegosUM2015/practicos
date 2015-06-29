@@ -1,7 +1,6 @@
 package ar.edu.um.vj2015;
 
 import com.badlogic.gdx.Gdx;
-
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,12 +11,12 @@ public class MainScreen extends AbstractScreen {
 	private Texture buttonTexture;
 	private SpriteBatch batch;	
 	private Button play;
-	private Button exit;
-	private float escala;
-	private Resources resources;
+	private Button exit;	
+	private SoundResources resources;
 
 	public MainScreen(Galaxy galaxy) {
 		super(galaxy);
+		
 		
 	}
 	
@@ -29,26 +28,28 @@ public class MainScreen extends AbstractScreen {
 		int centerY = Gdx.graphics.getHeight()/2 - buttonTexture.getHeight()/2;
 		play = new PlayButton(centerX -150, centerY -150);
 		exit = new ExitButton(centerX +150, centerY -150);
-		resources = new Resources();		
-		resources.getMainSong().play();
-		resources.getMainSong().setLooping(true);
-
-	
+		resources = new SoundResources();
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());	
 	
 	}
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
-		camera.update();
+		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );				
 		batch.setProjectionMatrix(camera.combined);
+		camera.update();		
 		batch.begin();
 		batch.draw(wallPaper2, 0, 0, wallPaper2.getWidth(), wallPaper2.getHeight());
 		play.draw(batch);
 		exit.draw(batch);
-		batch.end();
+		batch.end();		
 		play.update();
 		exit.update();
+		resources.getMainSong().play();
+		resources.getMainSong().setLooping(true);
+		if(isTouched())
+			resources.getMainSong().stop();
+			
 		
 	
 		
@@ -69,6 +70,14 @@ public class MainScreen extends AbstractScreen {
 		    heigthImage = widthImage*p;
 		}
 		escala = width/widthImage;	*/
+	}
+	
+	public boolean isTouched(){
+		if(Gdx.input.isTouched())
+			return true;
+		else 
+		return false;	
+		
 	}
 	
 	@Override

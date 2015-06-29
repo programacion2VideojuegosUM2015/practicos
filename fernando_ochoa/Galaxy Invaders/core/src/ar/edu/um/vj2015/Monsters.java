@@ -14,11 +14,13 @@ public class Monsters {
 	private Monster monster;
 	private float constanteX = 30;
 	private Array<Monster> monsters;
+	private SoundResources resources;
 	
 	
 	public Monsters(){
 		monstership = new Texture(Gdx.files.internal("mspaceship2.png"));
-		monsters = new Array<Monster>();	
+		monsters = new Array<Monster>();
+		resources = new SoundResources();
 
 		this.monsterSpawn();
 		
@@ -55,25 +57,26 @@ public class Monsters {
 		}
 	}
 	
-	/*public Monster getMonster(){	 
-		
-		for(Monster monster: monsters){			
-		
-			return monster;
-		}
-		return monster;
-		
-		
-	}*/
+	
 
-	public void detectCollision(Bullets bullets){
-		for (Monster monster : monsters) {
-		if (monster.getMonstersOutline().overlaps(bullets.getBullet().getBulletOutline())) {			
-			monsters.removeValue(monster, true);
-			bullets.getBullets().removeValue(bullets.getBullet(), true);
-			}	
+	public void detectCollision(Bullets bullets, Player player){
+		
+		
+		for (Monster monster: monsters) { 
+			if (monster!= null && bullets.getBullet() != null){
+			if (monster.getMonstersOutline().overlaps(bullets.getBullet().getBulletOutline())){
+				resources.getExplosion().play();
+				monsters.removeValue(monster, true);
+				bullets.getBullets().removeValue(bullets.getBullet(), true);				
+				player.AddScore();
+			if(monsters.size == 0)
+				Screens.game.setScreen(Screens.winnerScreen);
+			}
+			}
 		}
-}
+
+			
+	}
 	
 	
 
@@ -84,6 +87,11 @@ public class Monsters {
 	public void dispose(){
 		monstership.dispose();
 	}
+
+	public Monster getMonster() {
+		return monster;
+	}
+	
 	
 
 }

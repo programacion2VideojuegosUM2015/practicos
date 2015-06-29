@@ -36,25 +36,22 @@ public class GameScreen extends AbstractScreen {
 		monsters = new Monsters();
 		bullets= new Bullets();
 		player = new Player();
-		/*resources = new Resources();
-		resources.getMainSong().stop();
+		resources = new SoundResources();		
 		resources.getGameSong().play();
-		resources.getGameSong().setLooping(true);*/
-		
+		resources.getGameSong().setLooping(true);
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	
 	}
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );
-		camera.update();
+		Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT );				
 		batch.setProjectionMatrix(camera.combined);
+		camera.update();
 		spaceship.updateMovement();
-		bullets.update();		
+		bullets.update();
 		bullets.detectCollision(player);
-		//bullets.detectCollision2(monsters);
-		monsters.detectCollision(bullets);
-
+		monsters.detectCollision(bullets, player);
 		batch.begin();
 		batch.draw(wallPaper, 0, 0, wallPaper.getWidth(), wallPaper.getHeight());
 		monsters.draw(batch);
@@ -62,6 +59,8 @@ public class GameScreen extends AbstractScreen {
 		bullets.draw(batch);
 		player.draw(batch);
 		batch.end();
+		if(player.getLives() == 0)			
+				resources.getGameSong().stop();
 		
 	}
 	@Override

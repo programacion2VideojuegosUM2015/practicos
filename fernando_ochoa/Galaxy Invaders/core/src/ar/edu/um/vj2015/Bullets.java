@@ -3,8 +3,8 @@ package ar.edu.um.vj2015;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -20,10 +20,10 @@ public class Bullets {
 	private Spaceship spaceship;
 	private Monsters monsters;
 	private long lastShootTime;
-	private long lastDropTime;
+	private long lastBulletTime;
+	private SoundResources resources;
 	
-	private Sound shot;
-
+	
  public Bullets(){
 	 
 	 bluebullet = new Texture(Gdx.files.internal("bluebullet.png"));
@@ -31,30 +31,33 @@ public class Bullets {
 	 monsters = new Monsters();
 	 bullets = new Array<Bullet>();	 
 	 fallenBullets = new Array<Bullet>();	 
-	 shot = Gdx.audio.newSound(Gdx.files.internal("misil.mp3"));
+	 resources = new SoundResources();
 	 
  }
  public void update(){
+	 float deltaTime = Gdx.graphics.getDeltaTime();
 	 if (TimeUtils.nanoTime() - lastShootTime > 1000000000){
 		 
-	 if(Gdx.input.isKeyPressed(Keys.SPACE)){		
-		 bulletSpawn();
-		 shot.play();
-	 }
+		 
+		 if(Gdx.app.getType() == ApplicationType.Desktop)
+				inputDesktop();
+			else if(Gdx.app.getType() == ApplicationType.Android)
+				inputAndroid();
+	
 	 }
 		 for(Bullet bullet: bullets){
-		 bullet.getBulletOutline().y += bullet.getBulletSpeed() * Gdx.graphics.getDeltaTime();
+		 bullet.getBulletOutline().y += bullet.getBulletSpeed() * deltaTime;
 	 if (bullet.getBulletOutline().y > 450 - 64)
 		 bullets.removeValue(bullet, true);
 	
 		 }
-		 if (TimeUtils.nanoTime() - lastDropTime > 1000000000)
+		 if (TimeUtils.nanoTime() - lastBulletTime > 1000000000)
 		 fallenBulletSpawn();
 		
 		 
 		 for(Bullet bullet1: fallenBullets){
-			 bullet1.getBulletOutline().y -= bullet1.getBulletSpeed() * Gdx.graphics.getDeltaTime(); 
-			 if(bullet1.getBulletOutline().y +64 <0)
+			 bullet1.getBulletOutline().y -= bullet1.getBulletSpeed() * deltaTime; 
+			 if(bullet1.getBulletOutline().y < 10)
 				fallenBullets.removeValue(bullet1, true); 
 		 }
 		
@@ -62,7 +65,26 @@ public class Bullets {
 	 spaceship.updateMovement();
 	
  }
- public void draw(SpriteBatch batch ){
+ private void inputAndroid() {
+	 float coordX = Gdx.input.getX();
+		
+		if(Gdx.input.isTouched()){
+			if(coordX > 400){
+				 bulletSpawn();
+				 resources.getShot().play();				
+			}			
+		}
+	
+}
+private void inputDesktop() {
+	 
+	 if(Gdx.input.isKeyPressed(Keys.SPACE)){		
+		 bulletSpawn();
+		 resources.getShot().play();
+	 }
+	
+}
+public void draw(SpriteBatch batch ){
 	 for(Bullet bullet : bullets){
 	 batch.draw(bluebullet, bullet.getBulletOutline().getX(),
 			 bullet.getBulletOutline().getY());
@@ -79,50 +101,46 @@ public class Bullets {
  }
  //metodo con el q aparecen las balas q disparan los monstruos
  public void fallenBulletSpawn(){
-	 for(Monster monster: monsters.getMonsters()){
-		 int probability = MathUtils.random(0,800);
-		 int r = MathUtils.random(0,59);
-		 
-	if(probability < 5){	 
-	float locX = (monsters.getMonsters().get(r).getMonstersOutline().getX()+20);
-	float locY = monsters.getMonsters().get(r).getMonstersOutline().getY();		
-	 bullet1 = new Bullet(bluebullet, 100, locX,locY);
-	 fallenBullets.add(bullet1);
-	 lastDropTime= TimeUtils.nanoTime();
-	}
- }
- }
+		
+	  for(int i =0;i<monsters.getMonsters().size ;i++){
+		  if(monsters.getMonsters().get(i) != null && monsters.getMonsters().size != 0){
+			  
+			  int probability = MathUtils.random(0,800);
+			
+			  if(probability < 5){	 
+					float locX = monsters.getMonsters().get(i).getMonstersOutline().getX()+ monsters.getMonster().getTexture().getWidth()/2;
+				 	float locY = monsters.getMonsters().get(i).getMonstersOutline().getY();		
+				 	bullet1 = new Bullet(bluebullet, 100, locX,locY);
+				 	
+				 	fallenBullets.add(bullet1);
+				 	lastBulletTime= TimeUtils.nanoTime();
+			 		}
+				}
+	  		}
+	 	}
  
  //metodo de colision entre las balas de los monstruos y la nave
  public void detectCollision(Player player){
 		for (Bullet bullet1 :fallenBullets) {
-		if (bullet1.getBulletOutline().overlaps(spaceship.getSpaceshipOutline())){			
+		if (bullet1.getBulletOutline().overlaps(spaceship.getSpaceshipOutline())){
+			resources.getExplosion2().play();
 			fallenBullets.removeValue(bullet1, true);
 			player.removeLives();
-			if(player.getLives() == 0)
+			if(player.getLives() == 0){	
+				
 				Screens.game.setScreen(Screens.loserScreen);
+			}
 			}	
 		}
  }
  
- //Metodo de colision entre las balas de la nave con los monstruos
- /*public void detectCollision2(Monsters monsters){
-	 for(Bullet bullet: bullets){
-	 if(bullet.getBulletOutline().overlaps(monsters.getMonster().getMonstersOutline())){
-		 bullets.removeValue(bullet, true);
-		 monsters.getMonsters().removeValue(monsters.getMonster(), true);
-	 }
-	 }
- }*/
  
  
 
 
 
 public Bullet getBullet() {
-	for(Bullet bullet: bullets){
-	return bullet;
-	}
+	
 	return bullet;
 }
 
@@ -133,7 +151,7 @@ public Array<Bullet> getBullets() {
 }
 public void dispose(){
 	bluebullet.dispose();
-	shot.dispose();
+	resources.getShot().dispose();
 }
 
 
