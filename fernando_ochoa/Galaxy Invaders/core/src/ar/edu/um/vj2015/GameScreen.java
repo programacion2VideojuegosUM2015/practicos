@@ -22,7 +22,7 @@ public class GameScreen extends AbstractScreen {
 		super(galaxy);	
 		
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false,800, 450);
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		
 	}

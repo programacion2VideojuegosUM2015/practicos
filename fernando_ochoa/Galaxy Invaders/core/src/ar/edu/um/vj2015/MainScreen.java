@@ -64,15 +64,16 @@ public class MainScreen extends AbstractScreen {
 	@Override
 	public void resize(int width, int height) {
 		
+		
 	}
 	
-	public boolean isTouched(){
+	/*public boolean isTouched(){
 		if(Gdx.input.isTouched())
 			return true;
 		else 
 		return false;	
 		
-	}
+	}*/
 	
 	@Override
 	public void dispose(){

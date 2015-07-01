@@ -13,7 +13,7 @@ public class WinnerScreen extends AbstractScreen {
 	public WinnerScreen(Galaxy galaxy) {
 		super(galaxy);
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false,800,450);
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 	}
 	public void show(){
 		wallpaper4 = new Texture(Gdx.files.internal("fondoganador.png"));

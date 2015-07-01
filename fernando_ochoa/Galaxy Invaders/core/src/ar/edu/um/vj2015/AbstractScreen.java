@@ -16,7 +16,7 @@ public class AbstractScreen implements Screen {
 	public AbstractScreen(Galaxy galaxy) {
 		
 		this.galaxy = galaxy;
-		camera = new OrthographicCamera();
+		
 		
 	}
 

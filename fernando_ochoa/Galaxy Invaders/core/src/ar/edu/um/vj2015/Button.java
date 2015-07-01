@@ -18,9 +18,9 @@ public abstract class Button {
 		outline = new Rectangle(x ,y , buttonTexture.getWidth(), buttonTexture.getHeight());
 		
 		xMin = x;
-		yMax = 450 - y;
+		yMax = Gdx.graphics.getHeight() - y;
 		xMax = x + outline.width;
-		yMin = 450 - (y + outline.height);
+		yMin = Gdx.graphics.getHeight() - (y + outline.height);
 	}
 	
 	public void draw(SpriteBatch batch){

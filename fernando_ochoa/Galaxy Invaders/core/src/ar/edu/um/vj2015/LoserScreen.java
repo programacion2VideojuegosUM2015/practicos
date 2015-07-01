@@ -14,7 +14,7 @@ public class LoserScreen extends AbstractScreen {
 	public LoserScreen(Galaxy galaxy) {
 		super(galaxy);
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 450);
+		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 	}
 	public void show(){

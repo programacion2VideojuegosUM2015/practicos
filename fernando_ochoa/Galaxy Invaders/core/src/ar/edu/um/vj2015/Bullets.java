@@ -36,7 +36,7 @@ public class Bullets {
  }
  public void update(){
 	 float deltaTime = Gdx.graphics.getDeltaTime();
-	 if (TimeUtils.nanoTime() - lastShootTime > 1000000000){
+	 if (TimeUtils.nanoTime() - lastShootTime > 1000000000 ){
 		 
 		 
 		 if(Gdx.app.getType() == ApplicationType.Desktop)

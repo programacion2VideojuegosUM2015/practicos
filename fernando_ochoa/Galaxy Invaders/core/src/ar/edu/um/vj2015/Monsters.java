@@ -13,7 +13,7 @@ public class Monsters {
 	private Texture monstership;
 	private Monster monster;
 	private float constanteX = 30;
-	private Array<Monster> monsters;
+	public static Array<Monster> monsters;
 	private SoundResources resources;
 	
 	
