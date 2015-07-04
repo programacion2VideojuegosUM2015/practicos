@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="30" tilewidth="8" tileheight="8" nextobjectid="38">
+ <tileset firstgid="1" name="map" tilewidth="8" tileheight="8" spacing="2" margin="2">
+  <image source="map.png" width="112" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="land" tilewidth="8" tileheight="8">
+  <image source="land.png" width="72" height="8"/>
+ </tileset>
+ <layer name="suelo" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlUsKgDAMRHsN/+Bf739AB0QoRSFgh6DMg0ehi0yyCAlBCHFHDRvYws65Fytf7FmcFM75JbG2ZTZmvqV25ZzPhDmb+D/xXYnf9E83Rwg76T7l3qWnvb3eHg5whBOc4QJXuGXI38n133IAiHEHOQ==
+  </data>
+ </layer>
+ <layer name="agua" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzLsNwDAMxFA5dj52sv+84QAGBKjmA1hccxGSJEmSJEWcdNFNT2FnJi166dvsRgd1GoWd/f+SgAE5
+  </data>
+ </layer>
+ <objectgroup name="cls">
+  <object id="2" x="-25" y="215.792" width="89" height="35.2083"/>
+  <object id="3" x="192.125" y="216.125" width="89" height="35.6041"/>
+  <object id="5" x="-9" y="-11.6667" width="275.333" height="11.3333"/>
+  <object id="6" x="41.3333" y="251.667" width="176" height="7.33333"/>
+  <object id="30" x="208" y="96.5" width="7.75" height="31.5"/>
+  <object id="32" x="23.75" y="88" width="8.5" height="32.25"/>
+  <object id="35" x="56.25" y="48" width="32" height="8.5"/>
+  <object id="36" x="160.25" y="56" width="31.75" height="8.5"/>
+  <object id="37" x="80" y="160" width="87.75" height="8.25"/>
+ </objectgroup>
+ <layer name="en1" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt07ERAAAEQ1F72H9PvcppBP9VyuRczABtPh2gYWPm7y7/7HI34Asv3AC05H2yVw0BmO4A9A==
+  </data>
+ </layer>
+</map>

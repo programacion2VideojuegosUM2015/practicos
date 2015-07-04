@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="30" tilewidth="8" tileheight="8" nextobjectid="7">
+ <tileset firstgid="1" name="map" tilewidth="8" tileheight="8" spacing="2" margin="2">
+  <image source="map.png" width="112" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="land" tilewidth="8" tileheight="8">
+  <image source="land.png" width="72" height="8"/>
+ </tileset>
+ <layer name="suelo" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt00EKgCAQQFEPUgllZt3/gP2tq5CUCP6Dz+x0NhOCJEmSVJtopqVhxk82lf5l9A093e5KGyXaKdNBhc4O/1+D33/rBtjtBdY=
+  </data>
+ </layer>
+ <layer name="agua" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzLsNwDAMxFA5dj52sv+84QAGBKjmA1hccxGSJEmSJEWcdNFNT2FnJi166dvsRgd1GoWd/f+SgAE5
+  </data>
+ </layer>
+ <objectgroup name="cls">
+  <object id="1" x="72.125" y="160.125" width="111.75" height="7.75"/>
+  <object id="2" x="-25" y="215.792" width="89" height="35.2083"/>
+  <object id="3" x="192.125" y="216.125" width="89" height="35.6041"/>
+  <object id="5" x="-9" y="-11.6667" width="275.333" height="11.3333"/>
+  <object id="6" x="41.3333" y="251.667" width="176" height="7.33333"/>
+ </objectgroup>
+ <layer name="en1" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztxyEBAAAIA7D3oH9PCtzgEJtbAgDAZ3M8AN0CuE8AUg==
+  </data>
+ </layer>
+</map>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="30" tilewidth="8" tileheight="8" nextobjectid="6">
+ <tileset firstgid="1" name="map" tilewidth="8" tileheight="8" spacing="2" margin="2">
+  <image source="map.png" width="112" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="land" tilewidth="8" tileheight="8">
+  <image source="land.png" width="72" height="8"/>
+ </tileset>
+ <layer name="agua" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzLsNwDAMxFA5dj52sv+84QAGBKjmA1hccxGSJEmSJEWcdNFNT2FnJi166dvsRgd1GoWd/f+SgAE5
+  </data>
+ </layer>
+</map>

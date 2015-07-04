@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="30" tilewidth="8" tileheight="8" nextobjectid="23">
+ <tileset firstgid="1" name="map" tilewidth="8" tileheight="8" spacing="2" margin="2">
+  <image source="map.png" width="112" height="32"/>
+ </tileset>
+ <tileset firstgid="34" name="land" tilewidth="8" tileheight="8">
+  <image source="land.png" width="72" height="8"/>
+ </tileset>
+ <layer name="suelo" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztkzsOgDAMQ3MOoCDxh/sfEDMgMcBCU7lUftJTtnhIbCZEfjSwc9wVHPd9oSJm55Bfk/NFWtQxfn6JHdNf8fNL/Ku/c/WiNW43RBzn/cLL9Ljr/U+eZg8HOMIJznCBK9wc8vfE+2M5AFFnBt8=
+  </data>
+ </layer>
+ <layer name="agua" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzLsNwDAMxFA5dj52sv+84QAGBKjmA1hccxGSJEmSJEWcdNFNT2FnJi166dvsRgd1GoWd/f+SgAE5
+  </data>
+ </layer>
+ <objectgroup name="cls">
+  <object id="2" x="-25" y="215.792" width="89" height="35.2083"/>
+  <object id="3" x="192.125" y="216.125" width="89" height="35.6041"/>
+  <object id="5" x="-9" y="-11.6667" width="275.333" height="11.3333"/>
+  <object id="6" x="41.3333" y="251.667" width="176" height="7.33333"/>
+  <object id="8" x="112.125" y="184.25" width="31.75" height="7.875"/>
+  <object id="15" x="48.0909" y="40.0909" width="15.8182" height="7.81818"/>
+  <object id="16" x="200.091" y="40.0909" width="24" height="8.09091"/>
+  <object id="18" x="208" y="48.1818" width="7.90909" height="23.7273"/>
+  <object id="19" x="152.034" y="103.932" width="7.90909" height="23.7273"/>
+  <object id="20" x="144.125" y="95.8409" width="24" height="8.09091"/>
+  <object id="21" x="71.784" y="144.307" width="7.90909" height="23.7273"/>
+  <object id="22" x="63.875" y="136.216" width="24" height="8.09091"/>
+ </objectgroup>
+ <layer name="en1" width="32" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt00ENAAAIAzF84N8nAuBLAkkrYK9dBMzy6BbQaYwNfgUzbcBfBdZAAIg=
+  </data>
+ </layer>
+</map>
