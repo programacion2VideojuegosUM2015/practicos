@@ -11,6 +11,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 
@@ -27,6 +28,7 @@ public class PantallaJuego implements Screen{
     private Music musicaFondo;
 	private OrthographicCamera camara;
 	private Texture fondoPantalla;
+	private SpriteBatch batch;
 	
     
 
@@ -35,7 +37,7 @@ public class PantallaJuego implements Screen{
             this.arcanoid = arcanoid;
             
             ManejadorDeRecursos.cargarTodasLasTexturas();
-            
+            batch = new SpriteBatch();
             manejadorDeSprite = new ManejadorDeSprite(arcanoid.spriteBatch);
             manejadorDeNiveles = new ManejadorDeNiveles(manejadorDeSprite);
             manejadorDeNiveles.cargarNivelActual();
@@ -44,7 +46,7 @@ public class PantallaJuego implements Screen{
             fondoPantalla = ManejadorDeRecursos.getTextura("fondoJuego");
         	
             camara = new OrthographicCamera();
-    		camara.setToOrtho(false, Constantes.PANTALLA_ANCHURA, Constantes.PANTALLA_ALTURA);
+    		camara.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     		jugador = new Jugador();
       }
      
@@ -75,14 +77,14 @@ public class PantallaJuego implements Screen{
 		//actualizamos 
 		camara.update();
 		this.juegoGanado();
-		arcanoid.spriteBatch.setProjectionMatrix(camara.combined);
+		batch.setProjectionMatrix(camara.combined);
 		manejadorDeSprite.update(dt,arcanoid,jugador);
 		
 		//renderiza el manejadorDeSprite, fondo de pantalla y fuente de jugador
-		arcanoid.spriteBatch.begin();
-		arcanoid.spriteBatch.draw(fondoPantalla, 0, 0, Constantes.PANTALLA_ANCHURA, Constantes.PANTALLA_ALTURA);
-		jugador.draw(arcanoid.spriteBatch);
-		arcanoid.spriteBatch.end();
+		batch.begin();
+		batch.draw(fondoPantalla, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		jugador.draw(batch);
+		batch.end();
 		manejadorDeSprite.render();
       }
      

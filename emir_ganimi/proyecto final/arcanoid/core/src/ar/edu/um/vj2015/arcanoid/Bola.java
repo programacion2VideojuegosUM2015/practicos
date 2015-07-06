@@ -3,10 +3,11 @@ package ar.edu.um.vj2015.arcanoid;
 
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Bola extends Actores{
-
+	public static final int BOLA_ANCHURA = 20;
 	private boolean bolaInicio;
 	private float direccionX;
 	private float direccionY;
@@ -89,14 +90,14 @@ public class Bola extends Actores{
 			setSpeed(5);
 		}
 		//si la bola pega contra la pared derecha
-		if((x + textura.getWidth())>= Constantes.PANTALLA_ANCHURA){
-			x = Constantes.PANTALLA_ANCHURA -textura.getHeight();
+		if((x + textura.getWidth())>= Gdx.graphics.getWidth()){
+			x = Gdx.graphics.getWidth() -textura.getHeight();
 			direccionX *= -1;
 			setSpeed(5);
 		}	
 		//si la bola pega contra el techo del juego
-		if((y + textura.getHeight())>=Constantes.PANTALLA_ALTURA){
-			y = Constantes.PANTALLA_ALTURA - textura.getHeight();
+		if((y + textura.getHeight())>=Gdx.graphics.getHeight()){
+			y = Gdx.graphics.getHeight() - textura.getHeight();
 			direccionY *= -1;
 			setSpeed(5);
 		}
@@ -129,26 +130,26 @@ public class Bola extends Actores{
 					ladrillo.ganarJuego(manejadorDeSprite);
 				}
 				//si la bola pega desde abajo o arriba
-				if((rectangulo.y + Constantes.BOLA_ANCHURA)<=(ladrillo.y + Constantes.LADRILLO_ALTURA)){
+				if((rectangulo.y + BOLA_ANCHURA)<=(ladrillo.y + ladrillo.LADRILLO_ALTURA)){
 					direccionX *= -1;
 					direccionY *= -1;
 					
 					}
 					else{
-						y = rectangulo.y = ladrillo.y +Constantes.LADRILLO_ALTURA;
+						y = rectangulo.y = ladrillo.y + ladrillo.LADRILLO_ALTURA;
 						direccionY *= -1;
 						direccionX *= -1;
 						
 						}
 					
 				//si la bola pega desde el costado
-				if((rectangulo.x + Constantes.BOLA_ANCHURA)<=(ladrillo.x + Constantes.LADRILLO_ALTURA)){
+				if((rectangulo.x + BOLA_ANCHURA)<=(ladrillo.x + ladrillo.LADRILLO_ALTURA)){
 						direccionX *= -1;
 						direccionY *= 1;
 						
 					}
 					else{
-						x = rectangulo.x = ladrillo.x + Constantes.LADRILLO_ALTURA;
+						x = rectangulo.x = ladrillo.x + ladrillo.LADRILLO_ALTURA;
 						direccionX *= -1;
 						direccionY *= 1;
 						}	

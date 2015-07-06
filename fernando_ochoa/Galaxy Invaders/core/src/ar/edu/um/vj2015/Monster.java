@@ -7,11 +7,9 @@ public class Monster {
 	private Texture texture;
 	private Rectangle monstersOutline;
 	
-	
 	public Monster(Texture texture, float x, float y) {
-		super();
 		this.texture = texture;
-		
+	
 		monstersOutline = new Rectangle(x ,y ,texture.getWidth() ,texture.getHeight());
 	}
 
@@ -19,7 +17,6 @@ public class Monster {
 		return texture;
 	}
 	
-
 
 	public Rectangle getMonstersOutline() {
 		return monstersOutline;

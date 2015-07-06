@@ -30,7 +30,7 @@ public class ManejadorDeNiveles {
 			for (String ladrilloId : ladrilloIds) {
 				//if convierte los x del archivo en espacios en el juego
 				if (ladrilloId.trim().equals("x")) {
-					x += Constantes.LADRILLO_ANCHURA;
+					x += 45;
 					continue;
 				}
 				ladrillo = new Ladrillo(getTexturaLadrillo(ladrilloId.trim()), x, y, TipoLadrillo.values()[Integer.valueOf(ladrilloId.trim())]);
@@ -40,7 +40,7 @@ public class ManejadorDeNiveles {
 			}
 			x = 2;
 			//separacion entre filas 
-			y -= Constantes.LADRILLO_ANCHURA;
+			y -= ladrillo.LADRILLO_ANCHURA;
 		}
 	}
 	//metodo para obtener la textura del ladrillo segun el tipo

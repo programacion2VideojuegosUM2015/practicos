@@ -1,19 +1,29 @@
 package ar.edu.um.vj2015;
 
+
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class AbstractScreen implements Screen {
 	protected Galaxy galaxy;
+	protected OrthographicCamera camera;
+	protected SpriteBatch batch;
+	protected SoundResources resources;
+	
 
 	
 	public AbstractScreen(Galaxy galaxy) {
 		
 		this.galaxy = galaxy;
+		
+		
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 
@@ -25,7 +35,7 @@ public class AbstractScreen implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
